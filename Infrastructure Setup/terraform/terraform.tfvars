@@ -24,4 +24,3 @@ tags = {
   Terraform   = "true"
 }
 
- # Replace with your repo name

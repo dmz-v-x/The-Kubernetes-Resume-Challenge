@@ -1,6 +1,3 @@
-# terraform/variables.tf
-# Add these variables to your existing variables
-
 variable "endpoint_public_access" {
   description = "Whether the EKS cluster API server is publicly accessible"
   type        = bool
