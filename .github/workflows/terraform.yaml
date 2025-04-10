@@ -1,0 +1,75 @@
+name: "Terraform CI/CD"
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./Infrastructure Setup # Adjust this path based on your repository structure
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Create S3 bucket for Terraform state
+        run: |
+          aws s3api create-bucket \
+            --bucket eks-terrafrom-kubernetes-resume-challenge \
+            --region ap-south-1 \
+            --create-bucket-configuration LocationConstraint=ap-south-1 || true
+
+          aws s3api put-bucket-versioning \
+            --bucket eks-terrafrom-kubernetes-resume-challenge \
+            --versioning-configuration Status=Enabled
+
+      - name: Create DynamoDB table for state locking
+        run: |
+          aws dynamodb create-table \
+            --table-name terraform-state-lock-kubernetes-resume-challenge \
+            --attribute-definitions AttributeName=LockID,AttributeType=S \
+            --key-schema AttributeName=LockID,KeyType=HASH \
+            --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 || true
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.11.3"
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+      - name: Terraform Show
+        run: terraform show
