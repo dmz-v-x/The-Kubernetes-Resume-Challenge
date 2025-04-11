@@ -69,19 +69,19 @@ is_eks_nodegroup_role_enabled = true
 # EKS Addons Configuration
 addons = {
   "vpc-cni" = {
-    version = "v1.12.0-eksbuild.1"
+    version = "v1.19.3-eksbuild.1"
     tags = {
       "Purpose" = "Networking"
     }
   }
   "coredns" = {
-    version = "v1.8.7-eksbuild.1"
+    version = "v1.11.4-eksbuild.2"
   }
   "kube-proxy" = {
-    version = "v1.24.7-eksbuild.1"
+    version = "v1.31.3-eksbuild.2"
   }
   "aws-ebs-csi-driver" = {
-    version = "v1.5.0-eksbuild.1"
+    version = "v1.41.0-eksbuild.1"
     tags = {
       "Purpose" = "Storage"
     }
