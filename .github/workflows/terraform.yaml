@@ -15,7 +15,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./Infrastructure Setup # Adjust this path based on your repository structure
+        working-directory: ./Infrastructure Setup
 
     steps:
       - name: Checkout

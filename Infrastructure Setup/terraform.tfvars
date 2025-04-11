@@ -9,13 +9,13 @@ cluster_name = "my-eks-cluster"
 # Public Subnet Configuration
 public_subnet_count       = 3
 public_subnet_name        = "public-subnet"
-public_cidr_blocks        = ["10.16.0.0/20", "10.16.16.0/20", "10.16.32.0/20"]
+public_cidr_blocks        = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 public_availability_zones = ["ap-south-1a", "ap-south-1b", "ap-south-1c"]
 
 # Private Subnet Configuration
 private_subnet_count       = 3
 private_subnet_name        = "private-subnet"
-private_cidr_blocks        = ["10.16.128.0/20", "10.16.144.0/20", "10.16.160.0/20"]
+private_cidr_blocks        = ["10.0.11.0/24", "10.0.12.0/24", "10.0.13.0/24"]
 private_availability_zones = ["ap-south-1a", "ap-south-1b", "ap-south-1c"]
 
 # Internet Gateway Configuration
