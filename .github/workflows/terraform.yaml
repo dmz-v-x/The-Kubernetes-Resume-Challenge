@@ -31,13 +31,13 @@ jobs:
       - name: Create S3 bucket for Terraform state
         run: |
           aws s3api create-bucket \
-            --bucket eks-terrafrom-kubernetes-resume-challenge \
+            --bucket eks-terraform-kubernetes-resume-challenge \
             --region ap-south-1 \
             --create-bucket-configuration LocationConstraint=ap-south-1 || true
 
           aws s3api put-bucket-versioning \
-            --bucket eks-terrafrom-kubernetes-resume-challenge \
-            --versioning-configuration Status=Enabled
+            --bucket eks-terraform-kubernetes-resume-challenge \
+            --versioning-configuration Status=Enabled || true
 
       - name: Create DynamoDB table for state locking
         run: |
