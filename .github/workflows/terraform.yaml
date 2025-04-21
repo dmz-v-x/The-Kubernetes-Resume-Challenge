@@ -32,8 +32,7 @@ jobs:
         run: |
           aws s3api create-bucket \
             --bucket eks-terraform-kubernetes-resume-challenge \
-            --region us-east-1 \
-            --create-bucket-configuration LocationConstraint=us-east-1 || true
+            --region us-east-1 || true
 
           aws s3api put-bucket-versioning \
             --bucket eks-terraform-kubernetes-resume-challenge \
