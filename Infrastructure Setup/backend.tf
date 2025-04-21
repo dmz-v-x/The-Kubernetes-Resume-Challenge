@@ -3,7 +3,7 @@ terraform {
     bucket         = "eks-terraform-kubernetes-resume-challenge"
     region         = "us-east-1"
     key            = "eks/terraform.tfstate"
-    dynamodb_table = "terraform-state-lock-kubernetes-resume-challenge"
+    use_lockfile = "terraform-state-lock-kubernetes-resume-challenge"
     encrypt        = true
   }
 }
