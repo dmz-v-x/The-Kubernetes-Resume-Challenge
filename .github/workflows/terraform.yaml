@@ -26,14 +26,14 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1
+          aws-region: us-east-1
 
       - name: Create S3 bucket for Terraform state
         run: |
           aws s3api create-bucket \
             --bucket eks-terraform-kubernetes-resume-challenge \
             --region ap-south-1 \
-            --create-bucket-configuration LocationConstraint=ap-south-1 || true
+            --create-bucket-configuration LocationConstraint=us-east-1 || true
 
           aws s3api put-bucket-versioning \
             --bucket eks-terraform-kubernetes-resume-challenge \
